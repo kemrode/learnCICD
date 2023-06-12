@@ -23,4 +23,4 @@ jobs:
           if: ${{always()}}
           with:
             name: cypress-video-report
-            path: /home/runner/work/learnCICD/learnCICD/learncicdapp/cypress/videos/ 
+            path: cypress/videos
