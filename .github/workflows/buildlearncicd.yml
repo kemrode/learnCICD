@@ -9,7 +9,7 @@ jobs:
         - uses: actions/cache@v3
           with:
             path: |
-             node_modules
+             learncicdapp/node_modules
              /home/runner/.cache/Cypress
             key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         - run: |
@@ -24,7 +24,7 @@ jobs:
         - uses: actions/cache@v3
           with:
             path: |
-              node_modules
+              learncicdapp/node_modules
               /home/runner/.cache/Cypress
             key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         - run: |
@@ -34,4 +34,4 @@ jobs:
           if: always()
           with:
             name: cypress-video-report
-            path: /home/runner/work/learnCICD/learnCICD/learncicdapp/cypress/videos/app.cy.ts.mp4 
+            path: learncicdapp/cypress/videos/
