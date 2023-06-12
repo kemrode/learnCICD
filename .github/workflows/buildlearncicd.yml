@@ -29,11 +29,10 @@ jobs:
               /home/runner/.cache/Cypress
             key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         - name: Test e2e
-          run: |
-           cd learncicdapp
-           npm run e2e:headless
+          run: cd learncicdapp && npm run e2e:headless
         - name: Archive cypress video results
           uses: actions/upload-artifact@v3
+          if: always()
           with:
             name: cypress-video-report
             path: /home/runner/work/learnCICD/learnCICD/learncicdapp/cypress/videos/app.cy.ts.mp4 
