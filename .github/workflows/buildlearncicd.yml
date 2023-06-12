@@ -13,5 +13,5 @@ jobs:
           if: always()
           with:
             name: cypress-video-report
-            path: cypress/videos
+            path: /home/runner/work/learnCICD/learnCICD/learncicdapp/cypress/videos/ 
         - run: cd learncicdapp && npm run build
