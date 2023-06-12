@@ -6,6 +6,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v3
-        - run: cd learncicdapp
-        - run: npm install
-        - run: npm run build
+        - run: cd learncicdapp && npm install
+        - run: cd learncicdapp && npm run build
