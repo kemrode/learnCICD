@@ -7,4 +7,5 @@ jobs:
     steps:
         - uses: actions/checkout@v3
         - run: cd learncicdapp && npm install
+        - run: cd learncicdapp && npm run e2e:headless
         - run: cd learncicdapp && npm run build
