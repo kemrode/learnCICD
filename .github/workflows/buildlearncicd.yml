@@ -8,7 +8,9 @@ jobs:
         - uses: actions/checkout@v3
         - uses: actions/cache@v3
           with:
-            path: node_modules
+            path: |
+             node_modules
+             /home/runner/.cache/Cypress
             key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         - name: Install and run build
           run: |
@@ -22,7 +24,9 @@ jobs:
         - uses: actions/checkout@v3
         - uses: actions/cache@v3
           with:
-            path: node_modules
+            path: |
+              node_modules
+              /home/runner/.cache/Cypress
             key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         - name: Test e2e
           run: |
@@ -30,7 +34,7 @@ jobs:
            npm run e2e:headless
         - name: Archive cypress video results
           uses: actions/upload-artifact@v3
-          if: ${{always()}}
+          if: always()
           with:
             name: cypress-video-report
             path: cypress/videos
