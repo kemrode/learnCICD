@@ -5,5 +5,11 @@ jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
-      - run: cd learncicdapp
-      - run: npm run build
+        - uses: actions/checkout@v3
+        - uses: actions/setup-node@v3
+          with:
+            node-version: '14'
+        - run: npm install -g bats
+        - run: bats -v
+        - run: cd learncicdapp
+        - run: npm run build
