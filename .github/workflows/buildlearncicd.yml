@@ -85,7 +85,4 @@ jobs:
       - run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER}}@${{ secrets.SSH_HOST}} "\
           docker login ghcr.io -u kemrode -p ${{ secrets.GITHUB_TOKEN}}
-          docker pull ghcr.io/kemrode/learncicd:latest && \
-          docker stop && \
-          docker rm next && \
-          docker run -d -p 3000:3000 --name next ghrc.io/kemrode/learncicd:latest" 
+          docker compose -f docker-compose.prod.yml up -d --pull always"
