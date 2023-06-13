@@ -88,4 +88,4 @@ jobs:
           docker pull ghcr.io/kemrode/learncicd:latest && \
           docker stop && \
           docker rm next && \
-          docker run -d -p 3000:3000 --name next ghrc.io/kemrode/learncicd:latest 
+          docker run -d -p 3000:3000 --name next ghrc.io/kemrode/learncicd:latest"
