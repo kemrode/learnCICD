@@ -1,4 +1,3 @@
-FROM --plateform=linux/amd64 node:18
 FROM debian:10 AS nodejs-my-website
 RUN apt-get update -yq \
 && apt-get install curl gnupg -yq \
