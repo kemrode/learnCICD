@@ -1,0 +1,8 @@
+services:
+  next:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - ./learncicdapp:/app
+    commande: npm run dev
