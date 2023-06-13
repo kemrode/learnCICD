@@ -5,56 +5,56 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository}}
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-        - uses: actions/checkout@v3
-        - uses: actions/cache@v3
-          with:
-            path: |
-             learncicdapp/node_modules
-             /home/runner/.cache/Cypress
-            key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        - run: |
-            cd learncicdapp
-            npm install
-            npm run build
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-        - uses: actions/checkout@v3
-        - uses: actions/cache@v3
-          with:
-            path: |
-              learncicdapp/node_modules
-              /home/runner/.cache/Cypress
-            key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        - run: |
-            cd learncicdapp
-            npm run e2e:headless
-        - uses: actions/upload-artifact@v3
-          if: always()
-          with:
-            name: cypress-video-report
-            path: learncicdapp/cypress/videos/
-  deploy:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-      - uses: actions/checkout@v3
-      - uses: webfactory/ssh-agent@v0.7.0
-        with:
-            ssh-private-key: ${{ secrets.SSH_KEY }}
-      - run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER}}@${{ secrets.SSH_HOST}} "\
-          cd learnCICD && \
-          cd learncicdapp && \
-          git pull && \
-          npm install && \
-          npm run build && \
-          pm2 restart all"
-  package:
+  # build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #       - uses: actions/checkout@v3
+  #       - uses: actions/cache@v3
+  #         with:
+  #           path: |
+  #            learncicdapp/node_modules
+  #            /home/runner/.cache/Cypress
+  #           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+  #       - run: |
+  #           cd learncicdapp
+  #           npm install
+  #           npm run build
+  # test:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   steps:
+  #       - uses: actions/checkout@v3
+  #       - uses: actions/cache@v3
+  #         with:
+  #           path: |
+  #             learncicdapp/node_modules
+  #             /home/runner/.cache/Cypress
+  #           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+  #       - run: |
+  #           cd learncicdapp
+  #           npm run e2e:headless
+  #       - uses: actions/upload-artifact@v3
+  #         if: always()
+  #         with:
+  #           name: cypress-video-report
+  #           path: learncicdapp/cypress/videos/
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: test
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: webfactory/ssh-agent@v0.7.0
+  #       with:
+  #           ssh-private-key: ${{ secrets.SSH_KEY }}
+  #     - run: |
+  #         ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER}}@${{ secrets.SSH_HOST}} "\
+  #         cd learnCICD && \
+  #         cd learncicdapp && \
+  #         git pull && \
+  #         npm install && \
+  #         npm run build && \
+  #         pm2 restart all"
+  package-docker:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -74,3 +74,18 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/kemrode/learncicd:latest
+  deploy-docker:
+    runs-on: ubuntu-latest
+    needs: package-docker
+    steps:
+      - uses: actions/checkout@v3
+      - uses: webfactory/ssh-agent@v0.7.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+      - run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER}}@${{ secrets.SSH_HOST}} "\
+          docker login ghcr.io -u kemrode -p ${{ secrets.GITHUB_TOKEN}}
+          docker pull ghcr.io/kemrode/learncicd:latest && \
+          docker stop && \
+          docker rm next && \
+          docker run -d -p 3000:3000 --name next ghrc.io/kemrode/learncicd:latest
