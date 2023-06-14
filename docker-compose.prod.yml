@@ -1,5 +1,6 @@
 services:
   next:
   image: ghcr.io/kemrode/learncicd:latest
+  restart: always
   ports:
     - 3000:3000
