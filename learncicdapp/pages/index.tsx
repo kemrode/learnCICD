@@ -14,7 +14,8 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1>Coucou les aminches</h1>
-        <p> Je crois que j'en reprendrais bien encore un peu, pas vous ?</p>
+        <p> Je crois que j'en reprendrais bien encore un peu, pas vous</p>
+        <p> Bon je commence à en avoir assez marre maintenant </p>
         {/* <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1> */}
