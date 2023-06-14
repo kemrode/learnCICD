@@ -3,4 +3,4 @@ services:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval=30
+    command: development-next-1 prod-next-1--interval=30
