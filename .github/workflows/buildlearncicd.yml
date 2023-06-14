@@ -54,10 +54,11 @@ jobs:
   #         npm install && \
   #         npm run build && \
   #         pm2 restart all"
-  package-prod:
+  package-production:
     runs-on: ubuntu-latest
     needs: test
     environment: production
+    if: github.ref_name == 'main'
     permissions:
       contents: read
       packages: write
@@ -80,6 +81,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     environment: develop
+    if: github.ref_name == 'develop'
     permissions:
       contents: read
       packages: write
