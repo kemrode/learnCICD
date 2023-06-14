@@ -37,4 +37,4 @@ next-env.d.ts
 # cypress
 /cypress/screenshots
 /cypress/videos
-docker/db
+/Users/kevinfichou/Documents/03.CESI/CICD/learnCICD/docker/db
