@@ -22,6 +22,12 @@ services:
   
   adminer:
     image: adminer
+    networks:
+      - reverse-proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.next-adminer.rule=PathPrefix(`/adminer`)"
+      - "traefik.http.routers.next-adminer.entrypoints=web"
 
   
 networks:
