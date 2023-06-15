@@ -2,8 +2,12 @@ services:
   next:
     image: ghcr.io/kemrode/learncicd:latest
     restart: always
-    ports:
-      - 3000:3000
+    networks:
+      - reverse-proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.next-production.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.next-production.entrypoints=web"
 
   db:
     image: mariadb:10.6
@@ -18,5 +22,9 @@ services:
   
   adminer:
     image: adminer
-    ports:
-      - 8080:8080
+
+  
+networks:
+  reverse-proxy:
+    name: reverse-proxy
+    external: true
