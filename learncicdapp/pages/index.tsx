@@ -21,6 +21,7 @@ export default function Home() {
         </h1> */}
 
         <a href='/adminer'><p>Cliquez-moi, cliquez-moi</p></a>
+        <p>Mais tu vas cliquer, putain de bordel de  !!</p>
 
         <p className={styles.description}>
           Get started by editing{' '}

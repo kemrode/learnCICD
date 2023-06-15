@@ -6,8 +6,8 @@ services:
       - reverse-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.next-production.rule=Host('54.89.142.103') && PathPrefix(`/`)"
-      - "traefik.http.routers.next-production.entrypoints=web"
+      - "traefik.http.routers.next-development.rule=Host(`54.89.142.103`) && PathPrefix(`/`)"
+      - "traefik.http.routers.next-development.entrypoints=web"
 
   db:
     image: mariadb:10.6
@@ -26,8 +26,8 @@ services:
       - reverse-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.next-adminer.rule=PathPrefix(`/adminer`)"
-      - "traefik.http.routers.next-adminer.entrypoints=web"
+      - "traefik.http.routers.development-adminer.rule=Host(`54.89.142.103`) && PathPrefix(`/adminer`)"
+      - "traefik.http.routers.development-adminer.entrypoints=web"
         
 networks:
   reverse-proxy:

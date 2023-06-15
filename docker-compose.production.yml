@@ -6,7 +6,7 @@ services:
       - reverse-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.next-production.rule=Host('ec2-54-89-142-103.compute-1.amazonaws.com') && PathPrefix(`/`)"
+      - "traefik.http.routers.next-production.rule=Host(`ec2-54-89-142-103.compute-1.amazonaws.com`) && PathPrefix(`/`)"
       - "traefik.http.routers.next-production.entrypoints=web"
       # - "traefik.http.middlewares.test-stripprefix.stripprefix.prefixes=/next"
       # - "traefik.http.routers.next-production.middlewares=test-stripprefix"
@@ -28,7 +28,7 @@ services:
       - reverse-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.next-adminer.rule=PathPrefix(`/adminer`)"
+      - "traefik.http.routers.next-adminer.rule=Host(`ec2-54-89-142-103.compute-1.amazonaws.com`) && PathPrefix(`/adminer`)"
       - "traefik.http.routers.next-adminer.entrypoints=web"
 
   
