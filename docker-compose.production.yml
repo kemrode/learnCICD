@@ -6,8 +6,10 @@ services:
       - reverse-proxy
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.next-production.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.next-production.rule=PathPrefix(`/next`)"
       - "traefik.http.routers.next-production.entrypoints=web"
+      - "traefik.http.middlewares.test-stripprefix.stripprefix.prefixes=/next"
+      - "traefik.http.routers.next-production.middlewares=test-stripprefix"
 
   db:
     image: mariadb:10.6
