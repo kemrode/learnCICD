@@ -1,15 +1,9 @@
 services:
   next:
-    image: ghcr.io/kemrode/learncicd:latest
+    image: ghcr.io/kemrode/learncicd:dev
     restart: always
     ports:
-      - 3000:3000
-  
-  watchtower:
-    image: containrrr/watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval=30
+      - 3001:3000
 
   db:
     image: mariadb:10.6
@@ -25,4 +19,4 @@ services:
   adminer:
     image: adminer
     ports:
-      - 8080:8080
+      - 8081:8080

@@ -14,11 +14,13 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1>Coucou les aminches</h1>
-        <p> Je crois que j'en reprendrais bien encore un peu, pas vous</p>
+
         <p> Apparemment, ça a fonctionné, mais c'est assez long pour faire apparaître le changement, bande d'enflures de mes deux !</p>
         {/* <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1> */}
+
+        <a href='/adminer'><p>Cliquez-moi, cliquez-moi</p></a>
 
         <p className={styles.description}>
           Get started by editing{' '}
